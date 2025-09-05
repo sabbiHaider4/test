@@ -1,7 +1,8 @@
 steps:
+  # Step 0: Build project using Maven
   - name: 'maven'
-  - entrypoint: 'mvn'
-  - args: [ 'clean', 'install', '-DskipTests' ]
+    entrypoint: 'mvn'
+    args: ['clean', 'install', '-DskipTests']
 
   # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
@@ -25,7 +26,9 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
+
 options:
   logging: CLOUD_LOGGING_ONLY
 
-images: ['gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA']
+images:
+  - 'gcr.io/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
